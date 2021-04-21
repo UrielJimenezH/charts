@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HorizontalProgressChartView">
+        <attr name="horizontalBarColor" format="color|string" />
+        <attr name="horizontalBarBackgroundColor" format="color|string" />
+        <attr name="horizontalProgressPercentage" format="integer" />
+        <attr name="horizontalStrokeWidth" format="dimension" />
+        <attr name="horizontalStrokeRoundedCap" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="RingProgressChartView">
+        <attr name="ringBarColor" format="color|string" />
+        <attr name="ringBackgroundColor" format="color|string" />
+        <attr name="ringProgressPercentage" format="integer" />
+        <attr name="ringStrokeWidth" format="dimension" />
+        <attr name="ringStrokeRoundedCap" format="boolean" />
+        <attr name="ringText" format="string" />
+        <attr name="ringTextSize" format="dimension" />
+        <attr name="ringTextColor" format="color|string" />
+    </declare-styleable>
+
+    <declare-styleable name="StackedBarChartView">
+        <attr name="stackedBarChartDescription" format="reference" />
+        <attr name="stackedBarMainColor" format="color|string" />
+        <attr name="stackedBarLeftAxisTextSize" format="float" />
+        <attr name="stackedBarXAxisTextSize" format="float" />
+        <attr name="stackedBarLegendsTextSize" format="float" />
+        <attr name="stackedBarLegendFormSize" format="float" />
+    </declare-styleable>
+</resources>
