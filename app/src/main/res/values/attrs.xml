@@ -27,4 +27,10 @@
         <attr name="stackedBarLegendsTextSize" format="float" />
         <attr name="stackedBarLegendFormSize" format="float" />
     </declare-styleable>
+
+    <declare-styleable name="PieChartView">
+        <attr name="pieTextColor" format="color|string" />
+        <attr name="pieChartTitle" format="reference" />
+        <attr name="pieLegendsNumColumns" format="integer" />
+    </declare-styleable>
 </resources>
