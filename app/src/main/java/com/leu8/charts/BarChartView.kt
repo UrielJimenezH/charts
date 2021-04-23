@@ -228,7 +228,7 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
         barChart.legend.isEnabled = false
     }
 
-    fun setData(chartValues: ArrayList<Float>, xAxisLabels: ArrayList<String>, labels: Array<String>, colors: IntArray) {
+    fun setData(chartValues: ArrayList<Float>, xAxisLabels: ArrayList<String>, colors: IntArray) {
         if (chartValues.size != xAxisLabels.size)
             return
 
@@ -250,7 +250,6 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
             valuesSet.setDrawIcons(false)
 
             valuesSet.setColors(*this.colors)
-            valuesSet.stackLabels = labels
             val dataSets = ArrayList<IBarDataSet>()
             dataSets.add(valuesSet)
             val data = BarData(dataSets)
