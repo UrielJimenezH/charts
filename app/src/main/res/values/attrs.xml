@@ -33,4 +33,16 @@
         <attr name="pieChartTitle" format="reference" />
         <attr name="pieLegendsNumColumns" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="BarChartView">
+        <attr name="barChartTitle" format="reference" />
+        <attr name="barChartDescription" format="reference" />
+        <attr name="barMainColor" format="color|string" />
+        <attr name="barLeftAxisTextSize" format="float" />
+        <attr name="barXAxisTextSize" format="float" />
+        <attr name="barLegendsTextSize" format="float" />
+        <attr name="barLegendFormSize" format="float" />
+        <attr name="barLeftAmountDescription" format="reference" />
+        <attr name="barRightAmountDescription" format="reference" />
+    </declare-styleable>
 </resources>
