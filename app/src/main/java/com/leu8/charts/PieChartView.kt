@@ -96,10 +96,14 @@ class PieChartView @JvmOverloads constructor(context: Context,
         rvLegends = findViewById(R.id.pie_polyline_chart_view_rv_legends)
     }
 
-    private fun setData(entries: ArrayList<PieEntry>) {
+    fun setData(entries: ArrayList<PieChartEntry>) {
         val legends = ArrayList<Legend>()
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
+
+        val pieChartEntries = entries.map { entry ->
+            PieEntry(entry.value, entry.label)
+        }
 
         for (i in 0 until entries.size) {
             colors.add(Color.parseColor(colorsStr[i % colorsStr.size]))
@@ -109,7 +113,7 @@ class PieChartView @JvmOverloads constructor(context: Context,
         rvLegends.adapter = AdapterRecyclerViewLegends(legends)
         rvLegends.layoutManager = GridLayoutManager(context, 4)
 
-        val dataSet = PieDataSet(entries, "")
+        val dataSet = PieDataSet(pieChartEntries, "")
         dataSet.sliceSpace = 3f
         dataSet.selectionShift = 0f
 
