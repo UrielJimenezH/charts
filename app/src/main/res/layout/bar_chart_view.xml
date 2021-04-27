@@ -18,8 +18,7 @@
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bar_chart_view_chart"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/bar_chart_view_tv_chart_description"
@@ -32,8 +31,7 @@
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/bar_chart_view_tv_chart_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bar_chart_view_chart"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/bar_chart_view_chart"
@@ -64,7 +62,6 @@
         android:id="@+id/bar_chart_view_tv_left_amount_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         tools:text="Presupuesto"
         android:textSize="12sp"
         android:textColor="@color/colorPrimary"
@@ -92,7 +89,6 @@
         android:id="@+id/bar_chart_view_tv_right_amount_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         tools:text="Cobros"
         android:textSize="12sp"
         android:textColor="@color/colorPrimary"
