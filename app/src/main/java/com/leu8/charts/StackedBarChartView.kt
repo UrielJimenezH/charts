@@ -167,8 +167,16 @@ class StackedBarChartView @JvmOverloads constructor(ctx: Context,
         this.xAxisLabels = xAxisLabels
         this.stackColors = stackColors
 
-        chartValues.mapIndexedTo(this.chartValues) { index, arrayList ->
-            BarEntry(index.toFloat(), arrayList)
+        chartValues.mapIndexedTo(this.chartValues) { index, floatArray ->
+            val newValuesArrayList = ArrayList<Float>()
+
+            var sum = 0f
+            floatArray.forEach { value ->
+                newValuesArrayList.add(value - sum)
+                sum += value
+            }
+
+            BarEntry(index.toFloat(), newValuesArrayList.toFloatArray())
         }
 
         val valuesSet: BarDataSet
