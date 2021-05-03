@@ -33,7 +33,7 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
 
     var leftAxisTextSize = 12f
     var xAxisTextSize = 10f
-    var legendsTextSize = 10f
+    var legendsTextSize = 8f
     var legendsFormSize = 15f
     var mainColor: Int = 0
     var chartTitle: String = ""
