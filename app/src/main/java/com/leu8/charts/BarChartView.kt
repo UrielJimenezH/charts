@@ -37,19 +37,12 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
     var legendsFormSize = 15f
     var mainColor: Int = 0
     var chartTitle: String = ""
-    set(value) {
-        field = value
-        tvChartTitle.text = value
+        set(value) {
+            field = value
+    //        tvChartTitle.text = value
 
-        tvChartTitle.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
-        reDrawView()
-    }
-    val chartDescriptionVisibility: Int
-        get() {
-            return if (tvChartDescription.text.isEmpty())
-                View.GONE
-            else
-                View.VISIBLE
+    //        tvChartTitle.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
+            reDrawView()
         }
     var chartDescription: String = ""
         set(value) {
@@ -65,19 +58,19 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
             field = value
             tvLeftAmount.text = "$ ${df.format(value)} MXN"
 
-            if (value == null) {
-                tvLeftAmount.visibility =  View.GONE
-                tvLeftAmountDescription.visibility =  View.GONE
-            } else
-                tvLeftAmount.visibility =  View.VISIBLE
+//            if (value == null) {
+//                tvLeftAmount.visibility =  View.GONE
+//                tvLeftAmountDescription.visibility =  View.GONE
+//            } else
+//                tvLeftAmount.visibility =  View.VISIBLE
             reDrawView()
         }
     var leftAmountDescription: String = ""
         set(value) {
             field = value
             tvLeftAmountDescription.text = value
-
-            tvLeftAmountDescription.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
+//
+//            tvLeftAmountDescription.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
             reDrawView()
         }
 
@@ -87,11 +80,11 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
             field = value
             tvRightAmount.text = "$ ${df.format(value)} MXN"
 
-            if (value == null) {
-                tvRightAmount.visibility =  View.GONE
-                tvRightAmountDescription.visibility =  View.GONE
-            } else
-                tvRightAmount.visibility =  View.VISIBLE
+//            if (value == null) {
+//                tvRightAmount.visibility =  View.GONE
+//                tvRightAmountDescription.visibility =  View.GONE
+//            } else
+//                tvRightAmount.visibility =  View.VISIBLE
             reDrawView()
         }
     var rightAmountDescription: String = ""
@@ -99,7 +92,7 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
             field = value
             tvRightAmountDescription.text = value
 
-            tvRightAmountDescription.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
+//            tvRightAmountDescription.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
             reDrawView()
         }
 
@@ -169,25 +162,25 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
         tvRightAmountDescription = findViewById(R.id.bar_chart_view_tv_right_amount_description)
 
         tvChartTitle.setTextColor(mainColor)
-        chartTitle = if (chartTitleId != 0)
+        tvChartTitle.text = if (chartTitleId != 0)
             ctx.getString(chartTitleId)
-        else ""
+        else chartTitle
 
         tvChartDescription.setTextColor(mainColor)
         tvChartDescription.text = if (chartDescriptionId != 0)
             ctx.getString(chartDescriptionId)
         else chartDescription
-        tvChartDescription.visibility = chartDescriptionVisibility
+//        tvChartDescription.visibility = chartDescriptionVisibility
 
         tvLeftAmountDescription.setTextColor(mainColor)
-        leftAmountDescription = if (leftAmountDescriptionId != 0)
+        tvLeftAmountDescription.text = if (leftAmountDescriptionId != 0)
             ctx.getString(leftAmountDescriptionId)
-        else ""
+        else leftAmountDescription
 
         tvRightAmountDescription.setTextColor(mainColor)
-        rightAmountDescription = if (rightAmountDescriptionId != 0)
+        tvRightAmountDescription.text = if (rightAmountDescriptionId != 0)
             ctx.getString(rightAmountDescriptionId)
-        else ""
+        else rightAmountDescription
 
         setupChartView()
     }
