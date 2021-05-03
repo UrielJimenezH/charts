@@ -44,12 +44,16 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
         tvChartTitle.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
         reDrawView()
     }
+    val chartDescriptionVisibility: Int
+        get() {
+            return if (tvChartDescription.text.isEmpty())
+                View.GONE
+            else
+                View.VISIBLE
+        }
     var chartDescription: String = ""
         set(value) {
             field = value
-            tvChartDescription.text = value
-
-            tvChartDescription.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
             reDrawView()
         }
 
@@ -170,9 +174,10 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
         else ""
 
         tvChartDescription.setTextColor(mainColor)
-        chartDescription = if (chartDescriptionId != 0)
+        tvChartDescription.text = if (chartDescriptionId != 0)
             ctx.getString(chartDescriptionId)
-        else ""
+        else chartDescription
+        tvChartDescription.visibility = chartDescriptionVisibility
 
         tvLeftAmountDescription.setTextColor(mainColor)
         leftAmountDescription = if (leftAmountDescriptionId != 0)
