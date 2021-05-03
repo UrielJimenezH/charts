@@ -36,6 +36,7 @@ class StackedBarChartView @JvmOverloads constructor(ctx: Context,
             tvChartDescription.text = value
 
             tvChartDescription.visibility = if (value.isNullOrEmpty()) View.GONE else View.VISIBLE
+            reDrawView()
         }
 
     private var xAxisLabels: ArrayList<String> = ArrayList()
@@ -200,5 +201,10 @@ class StackedBarChartView @JvmOverloads constructor(ctx: Context,
 
         stackedBarChart.data.isHighlightEnabled = false
         stackedBarChart.invalidate()
+    }
+
+    private fun reDrawView() {
+        invalidate()
+        requestLayout()
     }
 }

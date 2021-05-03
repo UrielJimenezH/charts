@@ -18,7 +18,7 @@ class RingProgressChartView(context: Context, attrs: AttributeSet): View(context
         set(value) {
             field = value
 
-            refreshDrawableState()
+            reDrawView()
         }
     var barColor: Int = 0
     var barBackgroundColor: Int = 0
@@ -27,7 +27,8 @@ class RingProgressChartView(context: Context, attrs: AttributeSet): View(context
     var text: String = ""
         set(value) {
             field = value
-            refreshDrawableState()
+
+            reDrawView()
         }
     var textSize: Float = 30f
     var textColor: Int = 0
@@ -138,5 +139,10 @@ class RingProgressChartView(context: Context, attrs: AttributeSet): View(context
 
         val angle = (this.progressPercentage * 360 / 100).toFloat()
         canvas.drawArc(oval, 270f, -angle, false, chartPaint)
+    }
+
+    private fun reDrawView() {
+        invalidate()
+        requestLayout()
     }
 }

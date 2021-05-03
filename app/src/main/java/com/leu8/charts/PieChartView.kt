@@ -42,6 +42,7 @@ class PieChartView @JvmOverloads constructor(context: Context,
             tvTitle.text = value
 
             tvTitle.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
+            reDrawView()
         }
     var legendsNumColumns: Int = 4
     var usePercentValues = false
@@ -134,5 +135,10 @@ class PieChartView @JvmOverloads constructor(context: Context,
 
         chart.highlightValues(null)
         chart.invalidate()
+    }
+
+    private fun reDrawView() {
+        invalidate()
+        requestLayout()
     }
 }

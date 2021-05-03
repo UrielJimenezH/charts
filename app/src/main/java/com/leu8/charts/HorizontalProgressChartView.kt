@@ -13,7 +13,12 @@ import androidx.core.content.ContextCompat
 class HorizontalProgressChartView(context: Context, attrs: AttributeSet): View(context, attrs) {
     private val paint: Paint = Paint()
 
-    var progressPercentage: Int = 50
+    var progressPercentage: Int = 0
+        set(value) {
+            field = value
+
+            reDrawView()
+        }
     var barColor: Int = 0
     var barBackgroundColor: Int = 0
     var strokeWidth: Float = 0f
@@ -89,5 +94,10 @@ class HorizontalProgressChartView(context: Context, attrs: AttributeSet): View(c
         paint.color =  barColor
         if (progressPercentage > 1)
             canvas.drawLine(rectStart, centerY, progress + rectStart, centerY, paint)
+    }
+
+    private fun reDrawView() {
+        invalidate()
+        requestLayout()
     }
 }

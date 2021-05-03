@@ -42,6 +42,7 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
         tvChartTitle.text = value
 
         tvChartTitle.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
+        reDrawView()
     }
     var chartDescription: String = ""
         set(value) {
@@ -49,6 +50,7 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
             tvChartDescription.text = value
 
             tvChartDescription.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
+            reDrawView()
         }
 
 
@@ -64,6 +66,7 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
                 tvLeftAmountDescription.visibility =  View.GONE
             } else
                 tvLeftAmount.visibility =  View.VISIBLE
+            reDrawView()
         }
     var leftAmountDescription: String = ""
         set(value) {
@@ -71,6 +74,7 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
             tvLeftAmountDescription.text = value
 
             tvLeftAmountDescription.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
+            reDrawView()
         }
 
 
@@ -84,6 +88,7 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
                 tvRightAmountDescription.visibility =  View.GONE
             } else
                 tvRightAmount.visibility =  View.VISIBLE
+            reDrawView()
         }
     var rightAmountDescription: String = ""
         set(value) {
@@ -91,6 +96,7 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
             tvRightAmountDescription.text = value
 
             tvRightAmountDescription.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
+            reDrawView()
         }
 
     private var xAxisLabels: ArrayList<String> = ArrayList()
@@ -259,5 +265,10 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
 
         barChart.data.isHighlightEnabled = false
         barChart.invalidate()
+    }
+
+    private fun reDrawView() {
+        invalidate()
+        requestLayout()
     }
 }
