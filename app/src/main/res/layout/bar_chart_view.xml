@@ -28,7 +28,6 @@
         tools:text="Descripción"
         android:textSize="16sp"
         android:textColor="@color/colorPrimary"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/bar_chart_view_tv_chart_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -52,7 +51,6 @@
         android:textSize="14sp"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/bar_chart_view_chart"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -79,7 +77,6 @@
         android:textSize="14sp"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/bar_chart_view_chart"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintLeft_toLeftOf="parent"
