@@ -39,7 +39,7 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
     var chartTitle: String = ""
         set(value) {
             field = value
-    //        tvChartTitle.text = value
+            tvChartTitle.text = value
 
     //        tvChartTitle.visibility = if (value.isEmpty()) View.GONE else View.VISIBLE
             reDrawView()
@@ -47,6 +47,8 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
     var chartDescription: String = ""
         set(value) {
             field = value
+            tvChartDescription.text = value
+            
             reDrawView()
         }
 
