@@ -18,6 +18,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import kotlin.math.min
+import kotlin.math.roundToInt
 
 class StackedBarChartView @JvmOverloads constructor(ctx: Context,
                                                     attributeSet: AttributeSet? = null,
@@ -47,7 +48,7 @@ class StackedBarChartView @JvmOverloads constructor(ctx: Context,
     private val leftAxisValueFormatter: ValueFormatter =
         object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
-                return value.toInt().toString()
+                return value.roundToInt().toString()
             }
         }
 
@@ -159,6 +160,8 @@ class StackedBarChartView @JvmOverloads constructor(ctx: Context,
         legend.formToTextSpace = 8f
         legend.xEntrySpace = 20f
         legend.textSize = legendsTextSize
+
+        stackedBarChart.extraTopOffset = 10f
     }
 
     fun setData(chartValues: ArrayList<FloatArray>, xAxisLabels: ArrayList<String>, stackLabels: Array<String>, stackColors: IntArray) {
@@ -167,6 +170,19 @@ class StackedBarChartView @JvmOverloads constructor(ctx: Context,
 
         this.xAxisLabels = xAxisLabels
         this.stackColors = stackColors
+
+        var anyValueDifferentFromZero = false
+        chartValues.forEach { valuesArray ->
+            valuesArray.forEach { value ->
+                if (value != 0f)
+                    anyValueDifferentFromZero = true
+            }
+        }
+
+        if (!anyValueDifferentFromZero) {
+            this.stackColors = intArrayOf(ContextCompat.getColor(context, android.R.color.transparent))
+            chartValues[0] = floatArrayOf(10f)
+        }
 
         chartValues.mapIndexedTo(this.chartValues) { index, floatArray ->
             val newValuesArrayList = ArrayList<Float>()

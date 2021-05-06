@@ -19,6 +19,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import java.text.DecimalFormat
 import kotlin.math.min
+import kotlin.math.roundToInt
 
 class BarChartView @JvmOverloads constructor(ctx: Context,
                                                     attributeSet: AttributeSet? = null,
@@ -106,7 +107,7 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
     private val leftAxisValueFormatter: ValueFormatter =
         object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
-                return value.toInt().toString()
+                return value.roundToInt().toString()
             }
         }
 
@@ -208,6 +209,7 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
         xAxis.textColor = mainColor
         xAxis.axisLineColor = mainColor
         xAxis.textSize = xAxisTextSize
+        xAxis.yOffset = 5f
         xAxis.spaceMax = 0f
 
         val rightAxis = barChart.axisRight
@@ -240,6 +242,17 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
 
         this.xAxisLabels = xAxisLabels
         this.colors = colors
+
+        var anyValueDifferentFromZero = false
+        chartValues.forEach { value ->
+            if (value != 0f)
+                anyValueDifferentFromZero = true
+        }
+
+        if (!anyValueDifferentFromZero) {
+            this.colors = intArrayOf(ContextCompat.getColor(context, android.R.color.transparent))
+            chartValues[0] = 10f
+        }
 
         chartValues.mapIndexedTo(this.chartValues) { index, arrayList ->
             BarEntry(index.toFloat(), arrayList)

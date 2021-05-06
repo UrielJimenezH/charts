@@ -15,6 +15,7 @@ import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
+import kotlin.math.roundToInt
 
 class PieChartView @JvmOverloads constructor(context: Context,
                                              attributeSet: AttributeSet? = null,
@@ -31,7 +32,7 @@ class PieChartView @JvmOverloads constructor(context: Context,
     var valueFormatter: ValueFormatter =
         object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
-                return value.toInt().toString()
+                 return value.roundToInt().toString()
             }
         }
 
@@ -102,8 +103,10 @@ class PieChartView @JvmOverloads constructor(context: Context,
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
 
-        val pieChartEntries = entries.map { entry ->
-            PieEntry(entry.value, entry.label)
+        val pieChartEntries = ArrayList<PieEntry>()
+        entries.forEach { entry ->
+            if (entry.value > 0f)
+                pieChartEntries.add(PieEntry(entry.value, entry.label))
         }
 
         for (i in 0 until entries.size) {
