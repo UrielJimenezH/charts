@@ -171,18 +171,18 @@ class StackedBarChartView @JvmOverloads constructor(ctx: Context,
         this.xAxisLabels = xAxisLabels
         this.stackColors = stackColors
 
-        var anyValueDifferentFromZero = false
-        chartValues.forEach { valuesArray ->
-            valuesArray.forEach { value ->
-                if (value != 0f)
-                    anyValueDifferentFromZero = true
-            }
-        }
+//        var anyValueDifferentFromZero = false
+//        chartValues.forEach { valuesArray ->
+//            valuesArray.forEach { value ->
+//                if (value != 0f)
+//                    anyValueDifferentFromZero = true
+//            }
+//        }
 
-        if (!anyValueDifferentFromZero) {
-            this.stackColors = intArrayOf(ContextCompat.getColor(context, android.R.color.transparent))
-            chartValues[0] = floatArrayOf(10f)
-        }
+//        if (!anyValueDifferentFromZero) {
+//            this.stackColors = intArrayOf(stackColors.for, ContextCompat.getColor(context, android.R.color.transparent))
+            chartValues.add(floatArrayOf(0f, 0f, 10f))
+//        }
 
         chartValues.mapIndexedTo(this.chartValues) { index, floatArray ->
             val newValuesArrayList = ArrayList<Float>()

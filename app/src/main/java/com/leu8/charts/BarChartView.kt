@@ -243,19 +243,19 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
         this.xAxisLabels = xAxisLabels
         this.colors = colors
 
-        var anyValueDifferentFromZero = false
-        chartValues.forEach { value ->
-            if (value != 0f)
-                anyValueDifferentFromZero = true
-        }
+//        var anyValueDifferentFromZero = false
+//        chartValues.forEach { value ->
+//            if (value != 0f)
+//                anyValueDifferentFromZero = true
+//        }
 
-        if (!anyValueDifferentFromZero) {
-            this.colors = intArrayOf(ContextCompat.getColor(context, android.R.color.transparent))
-            chartValues[0] = 10f
-        }
+//        if (!anyValueDifferentFromZero) {
+//            this.colors = intArrayOf(ContextCompat.getColor(context, android.R.color.transparent))
+//            chartValues[0] = floatArrayOf(chartValues[0], 10f)
+//        }
 
         chartValues.mapIndexedTo(this.chartValues) { index, arrayList ->
-            BarEntry(index.toFloat(), arrayList)
+            BarEntry(index.toFloat(), floatArrayOf(arrayList, 10f))
         }
 
         val valuesSet: BarDataSet
