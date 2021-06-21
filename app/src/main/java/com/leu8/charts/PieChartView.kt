@@ -26,7 +26,8 @@ class PieChartView @JvmOverloads constructor(context: Context,
 
     private val colors = ArrayList<Int>()
     private val colorsStr = arrayOf(
-        "#82ab80", "#bfd3ed", "#fea7a2", "#c490dd", "#fce2bb", "#ace280"
+        "#13131f", "#0e425f", "#0980ae", "#76777c", "#ed8a66", "#823c3e", "#4b4473", "#207fd8", "#910a33", "#5c4425",
+        "#00a78b", "#dedc50", "#e48415", "#ff565f", "#ffcf8f", "#1aafac", "#c78e3e", "#4c1e21", "#00a39c", "#ff4719"
     )
 
     var valueFormatter: ValueFormatter =
