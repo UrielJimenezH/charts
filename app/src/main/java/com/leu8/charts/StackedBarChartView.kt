@@ -181,7 +181,7 @@ class StackedBarChartView @JvmOverloads constructor(ctx: Context,
 
 //        if (!anyValueDifferentFromZero) {
 //            this.stackColors = intArrayOf(stackColors.for, ContextCompat.getColor(context, android.R.color.transparent))
-            chartValues.add(floatArrayOf(0f, 0f, 10f))
+            chartValues[0] = floatArrayOf(chartValues[0][0], chartValues[0][1], 10f)
 //        }
 
         chartValues.mapIndexedTo(this.chartValues) { index, floatArray ->
