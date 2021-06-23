@@ -17,6 +17,8 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
+import kotlin.collections.ArrayList
+import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
@@ -169,32 +171,44 @@ class StackedBarChartView @JvmOverloads constructor(ctx: Context,
             return
 
         this.xAxisLabels = xAxisLabels
-        this.stackColors = stackColors
 
-//        var anyValueDifferentFromZero = false
-//        chartValues.forEach { valuesArray ->
-//            valuesArray.forEach { value ->
-//                if (value != 0f)
-//                    anyValueDifferentFromZero = true
-//            }
-//        }
-
-//        if (!anyValueDifferentFromZero) {
-//            this.stackColors = intArrayOf(stackColors.for, ContextCompat.getColor(context, android.R.color.transparent))
-            chartValues[0] = floatArrayOf(chartValues[0][0], chartValues[0][1], 10f)
-//        }
-
-        chartValues.mapIndexedTo(this.chartValues) { index, floatArray ->
-            val newValuesArrayList = ArrayList<Float>()
-
-            var sum = 0f
-            floatArray.forEach { value ->
-                newValuesArrayList.add(value - sum)
-                sum += value
-            }
-
-            BarEntry(index.toFloat(), newValuesArrayList.toFloatArray())
+        //STACK VALUES
+        var longestArray = 0
+        chartValues.forEach { floatArray ->
+             longestArray = max(longestArray, floatArray.size)
         }
+
+        chartValues.mapIndexedTo(this.chartValues) { indexA, floatArray ->
+            val newValuesArrayList = FloatArray(longestArray + 1)
+
+            longestArray = max(longestArray, floatArray.size)
+            var maxValue = 0
+            floatArray.forEachIndexed { indexB, value ->
+                newValuesArrayList[indexB] = value - maxValue
+                maxValue = max(maxValue, value.toInt())
+            }
+            newValuesArrayList[longestArray] = 10f - maxValue
+
+            BarEntry(indexA.toFloat(), newValuesArrayList)
+        }
+
+        val limit = min(stackColors.size, longestArray)
+
+        //STACK LABELS AND COLORS
+        val newColorsArrayList = ArrayList<Int>()
+        val newStackLabelsArrayList = ArrayList<String>()
+
+        for (i in 0 until limit) {
+            newColorsArrayList.add(stackColors[i])
+            newStackLabelsArrayList.add(stackLabels[i])
+        }
+
+        newColorsArrayList.add(android.R.color.transparent)
+        this.stackColors = newColorsArrayList.toIntArray()
+
+        newStackLabelsArrayList.add("")
+        var newStackLabels = arrayOfNulls<String>(newStackLabelsArrayList.size)
+        newStackLabels = newStackLabelsArrayList.toArray(newStackLabels)
 
         val valuesSet: BarDataSet
         if (stackedBarChart.data != null && stackedBarChart.data.dataSetCount > 0) {
@@ -207,7 +221,7 @@ class StackedBarChartView @JvmOverloads constructor(ctx: Context,
             valuesSet.setDrawIcons(false)
 
             valuesSet.setColors(*this.stackColors)
-            valuesSet.stackLabels = stackLabels
+            valuesSet.stackLabels = newStackLabels
             val dataSets = ArrayList<IBarDataSet>()
             dataSets.add(valuesSet)
             val data = BarData(dataSets)

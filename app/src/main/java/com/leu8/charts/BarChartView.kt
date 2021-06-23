@@ -18,6 +18,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import java.text.DecimalFormat
+import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
@@ -236,27 +237,27 @@ class BarChartView @JvmOverloads constructor(ctx: Context,
         barChart.legend.isEnabled = false
     }
 
-    fun setData(chartValues: ArrayList<Float>, xAxisLabels: ArrayList<String>, colors: IntArray) {
+    fun setData(chartValues: ArrayList<Float>, xAxisLabels: ArrayList<String>, color: Int) {
         if (chartValues.size != xAxisLabels.size)
             return
 
         this.xAxisLabels = xAxisLabels
-        this.colors = colors
 
-//        var anyValueDifferentFromZero = false
-//        chartValues.forEach { value ->
-//            if (value != 0f)
-//                anyValueDifferentFromZero = true
-//        }
+        //STACK VALUES
+        chartValues.mapIndexedTo(this.chartValues) { index, value ->
+            val newValuesArrayList = ArrayList<Float>()
+            newValuesArrayList.add(value)
+            newValuesArrayList.add(10f - value)
 
-//        if (!anyValueDifferentFromZero) {
-//            this.colors = intArrayOf(ContextCompat.getColor(context, android.R.color.transparent))
-//            chartValues[0] = floatArrayOf(chartValues[0], 10f)
-//        }
-
-        chartValues.mapIndexedTo(this.chartValues) { index, arrayList ->
-            BarEntry(index.toFloat(), floatArrayOf(arrayList, 10f))
+            BarEntry(index.toFloat(), newValuesArrayList.toFloatArray())
         }
+
+        //STACK COLORS
+        val newColorsArrayList = ArrayList<Int>()
+        newColorsArrayList.add(color)
+        newColorsArrayList.add(android.R.color.transparent)
+
+        this.colors = newColorsArrayList.toIntArray()
 
         val valuesSet: BarDataSet
         if (barChart.data != null && barChart.data.dataSetCount > 0) {

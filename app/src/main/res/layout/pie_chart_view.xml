@@ -32,6 +32,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/pie_polyline_chart_view_rv_legends"/>
 
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/pie_polyline_chart_view_tv_no_data_available"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_data_available"
+        tools:visibility="visible"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/pie_polyline_chart_view_chart"
+        app:layout_constraintBottom_toBottomOf="@id/pie_polyline_chart_view_chart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pie_polyline_chart_view_rv_legends"
         android:layout_width="match_parent"

@@ -22,6 +22,7 @@ class PieChartView @JvmOverloads constructor(context: Context,
                                              defStyleAttr: Int = 0) : ConstraintLayout(context, attributeSet, defStyleAttr) {
     private lateinit var tvTitle: TextView
     private lateinit var chart: PieChart
+    private lateinit var tvNoDataAvailable: TextView
     private lateinit var rvLegends: RecyclerView
 
     private val colors = ArrayList<Int>()
@@ -67,7 +68,6 @@ class PieChartView @JvmOverloads constructor(context: Context,
         } else
             ContextCompat.getColor(context, textColor)
 
-       
         attributes.getResourceId(R.styleable.PieChartView_pieChartTitle, 0)
         
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -96,6 +96,7 @@ class PieChartView @JvmOverloads constructor(context: Context,
     private fun bindViews() {
         tvTitle = findViewById(R.id.pie_polyline_chart_view_tv_chart_title)
         chart = findViewById(R.id.pie_polyline_chart_view_chart)
+        tvNoDataAvailable = findViewById(R.id.pie_polyline_chart_view_tv_no_data_available)
         rvLegends = findViewById(R.id.pie_polyline_chart_view_rv_legends)
     }
 
@@ -117,6 +118,9 @@ class PieChartView @JvmOverloads constructor(context: Context,
 
         rvLegends.adapter = AdapterRecyclerViewLegends(legends)
         rvLegends.layoutManager = GridLayoutManager(context, 4)
+
+        if (pieChartEntries.isEmpty())
+            tvNoDataAvailable.visibility = View.VISIBLE
 
         val dataSet = PieDataSet(pieChartEntries, "")
         dataSet.sliceSpace = 3f
