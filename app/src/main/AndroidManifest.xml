@@ -2,7 +2,7 @@
     package="com.leu8.charts">
 
     <application
-        android:allowBackup="true"
         android:supportsRtl="true" />
+        android:allowBackup="false"
 
 </manifest>
